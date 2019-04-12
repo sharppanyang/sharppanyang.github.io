@@ -13,7 +13,7 @@ timezone: Asia/Shanghai
 
 # URL 网址
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://sharppanyang.github.io/
 root: /
 # permalink: :year/:month/:day/:title/
 permalink: post/:abbrlink.html
@@ -87,3 +87,12 @@ deploy:
   type: git
   repo: git@github.com:sharppanyang/sharppanyang.github.io.git
   branch: master
+
+Plugins:
+- hexo-generator-baidu-sitemap
+- hexo-generator-sitemap
+
+baidusitemap:
+  path: baidusitemap.xml
+sitemap:
+  path: sitemap.xml

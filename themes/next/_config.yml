@@ -101,7 +101,7 @@ menu:
   schedule: /schedule/ || calendar
   sitemap: /sitemap.xml || sitemap
   commonweal: /404/404.html || heartbeat
-  yangDarling: /you/ || terminal
+  yangDarling: /yangDarling/ || terminal
 
 # Enable/Disable menu icons.
 menu_icons:
