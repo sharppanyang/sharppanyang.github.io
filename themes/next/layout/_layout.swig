@@ -22,6 +22,8 @@
   <div class="{{ container_class }} {% block page_class %}{% endblock %}">
     <div class="headband"></div>
 
+    <a href="https://github.com/sharppanyang"><img width="149" height="149" style="position:absolute;top:0;right:0;border:0;"  src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"> {%- include '_partials/header.swig' %} </div>
     </header>
@@ -38,6 +40,7 @@
         {% if theme.sidebar.display !== 'remove' %}
           {% block sidebar %}{% endblock %}
         {% endif %}
+
       </div>
     </main>
 
@@ -88,5 +91,25 @@
   {% include '_third-party/mathjax.swig' %}
   {% include '_third-party/scroll-cookie.swig' %}
   {% include '_third-party/exturl.swig' %}
+
+  <!-- 雪花特效 --> <script type="text/javascript"> var windowWidth = $(window).width(); if (windowWidth > 480) { document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>'); } </script>
 </body>
 </html>
+<!-- 页面点击小红心 -->
+<!--
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+-->
+
+<!-- 页面点击出现文字 -->
+<script type="text/javascript" src="/js/src/click_show_text.js"></script>
+
+<!-- 页面点击出现烟花爆炸效果 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+<script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<!-- 样式一（鼠标点击更换样式） -->
+<script src="https://g.joyinshare.com/hc/ribbon.min.js" type="text/javascript"></script>
+
+<!-- 样式二（飘动的彩带） -->
+<script src="https://g.joyinshare.com/hc/piao.js" type="text/javascript"></script>

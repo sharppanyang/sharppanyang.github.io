@@ -232,13 +232,13 @@ post_meta:
   updated_at: false
   categories: true
 
-# Post wordcount display settings
+# Post wordcount display settings 
 # Dependencies: https://github.com/willin/hexo-wordcount
 post_wordcount:
   item_text: true
-  wordcount: false
+  wordcount: true
   min2read: false
-  totalcount: false
+  totalcount: true
   separated_meta: true
 
 # Wechat Subscriber
@@ -255,7 +255,7 @@ post_wordcount:
 
 # Declare license on posts
 post_copyright:
-  enable: false
+  enable: true
   license: CC BY-NC-SA 3.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/3.0/
 
@@ -431,7 +431,7 @@ gitment:
 # This plugin is more useful in China, make sure you known how to use it.
 # And you can find the use guide at official webiste: http://www.jiathis.com/.
 # Warning: JiaThis does not support https.
-#jiathis:
+# jiathis: true
   ##uid: Get this uid from http://www.jiathis.com/
 #add_this_id:
 
@@ -809,6 +809,9 @@ vendors:
   # needMoreShare2
   # https://github.com/revir/need-more-share2
   needMoreShare2:
+
+  # 页面点击小爱心开关
+  clicklove: true
 
 
 # Assets
