@@ -87,7 +87,7 @@ deploy:
   type: git
   repo: 
     github: git@github.com:sharppanyang/sharppanyang.github.io.git
-    coding: git@git.dev.tencent.com:panxinyangruxue/sharppanyang.git
+    coding: git@git.dev.tencent.com:panxinyangruxue/sharppanyang.coding.me.git
   branch: master
 
 Plugins:
