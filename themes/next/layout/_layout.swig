@@ -92,7 +92,7 @@
   {% include '_third-party/scroll-cookie.swig' %}
   {% include '_third-party/exturl.swig' %}
 
-  <!-- 雪花特效 --> <script type="text/javascript"> var windowWidth = $(window).width(); if (windowWidth > 480) { document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>'); } </script>
+  <!-- 雪花特效 <script type="text/javascript"> var windowWidth = $(window).width(); if (windowWidth > 480) { document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>'); } </script> --> 
 </body>
 </html>
 <!-- 页面点击小红心 -->
