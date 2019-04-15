@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Linux,Ubuntu,mount,unmount,NTFS,">
+  <meta name="keywords" content="Linux,Ubuntu,mount,umount,NTFS,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="Ubuntu下手动挂载NTFS格式的U盘我们都知道，在Linux下使用U盘、硬盘等移动设备时，需要手动挂载这些设备。现在的很多Linux桌面发行版本，如我使用的Ubuntu 18在检测到有移动设备插入时，将会自动完成挂载该设备。但凡事都会有意外，今天我插入的U盘居然有莫名的错误（我猜测可能是未正确卸载导致的），这时候我可怜的Ubuntu兄弟就没能自动挂载了。 有需求就要学习新知识，这不我赶紧趁着这">
-<meta name="keywords" content="Linux,Ubuntu,mount,unmount,NTFS">
+<meta name="keywords" content="Linux,Ubuntu,mount,umount,NTFS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu下手动挂载NTFS格式的U盘">
 <meta property="og:url" content="https://sharppanyang.github.io/post/3c503eab.html">
@@ -89,7 +89,11 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://sharppanyang.github.io/post/3c503eab/unexist_sdb.png">
 <meta property="og:image" content="https://sharppanyang.github.io/post/3c503eab/exist_sdb.png">
-<meta property="og:updated_time" content="2019-04-12T07:35:24.138Z">
+<meta property="og:image" content="https://sharppanyang.github.io/post/3c503eab/file_system_format.png">
+<meta property="og:image" content="https://sharppanyang.github.io/post/3c503eab/mount.png">
+<meta property="og:image" content="https://sharppanyang.github.io/post/3c503eab/auto-mount.png">
+<meta property="og:image" content="https://sharppanyang.github.io/post/3c503eab/umount.png">
+<meta property="og:updated_time" content="2019-04-15T01:07:27.764Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu下手动挂载NTFS格式的U盘">
 <meta name="twitter:description" content="Ubuntu下手动挂载NTFS格式的U盘我们都知道，在Linux下使用U盘、硬盘等移动设备时，需要手动挂载这些设备。现在的很多Linux桌面发行版本，如我使用的Ubuntu 18在检测到有移动设备插入时，将会自动完成挂载该设备。但凡事都会有意外，今天我插入的U盘居然有莫名的错误（我猜测可能是未正确卸载导致的），这时候我可怜的Ubuntu兄弟就没能自动挂载了。 有需求就要学习新知识，这不我赶紧趁着这">
@@ -128,6 +132,7 @@
 
 
 
+<link href="//cdn.bootcss.com/animate.css/3.7.0/animate.min.css" rel="stylesheet">
 
   <title>Ubuntu下手动挂载NTFS格式的U盘 | panyang's home</title>
   
@@ -150,6 +155,8 @@
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
+
+    <a href="https://github.com/sharppanyang"><img width="149" height="149" style="position:absolute;top:0;right:0;border:0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_red_aa0000.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -275,9 +282,41 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -371,6 +410,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/post/3c503eab.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/post/3c503eab.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -378,6 +427,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  846
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -409,7 +477,22 @@
 <img src="/post/3c503eab/unexist_sdb.png" title="未插入U盘前的设备名称详情">
 <img src="/post/3c503eab/exist_sdb.png" title="插入U盘后的设备名称详情">
 <p>由此可知，我们插入的U盘设备名称叫做 /dev/sdb1 。</p>
-<h2 id="2-查看该U盘的文件存储格式"><a href="#2-查看该U盘的文件存储格式" class="headerlink" title="2.查看该U盘的文件存储格式"></a>2.查看该U盘的文件存储格式</h2><h2 id="3-修复U盘上莫名的错误"><a href="#3-修复U盘上莫名的错误" class="headerlink" title="3.修复U盘上莫名的错误"></a>3.修复U盘上莫名的错误</h2><h2 id="4-创建挂载点并完成手动挂载"><a href="#4-创建挂载点并完成手动挂载" class="headerlink" title="4.创建挂载点并完成手动挂载"></a>4.创建挂载点并完成手动挂载</h2><h2 id="5-卸载设备"><a href="#5-卸载设备" class="headerlink" title="5.卸载设备"></a>5.卸载设备</h2>
+<h2 id="2-查看该U盘的文件系统格式"><a href="#2-查看该U盘的文件系统格式" class="headerlink" title="2.查看该U盘的文件系统格式"></a>2.查看该U盘的文件系统格式</h2><p>找到了U盘设备的名称后，我们急需知道该文件系统格式。接下来我们学习这个shell命令来查询U盘设备的文件系统格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo fdisk -l /dev/sdb</span><br></pre></td></tr></table></figure>
+<p>通过以下截图，我们可以看到目标设备——“/dev/sdb1”的文件系统格式是“NTFS”：</p>
+<img src="/post/3c503eab/file_system_format.png" title="U盘的文件系统格式">
+<h2 id="3-修复U盘上莫名的错误"><a href="#3-修复U盘上莫名的错误" class="headerlink" title="3.修复U盘上莫名的错误"></a>3.修复U盘上莫名的错误</h2><p>现在我们知道了U盘的设备名称和文件格式系统，理论上可以进行手动的挂载U盘了。不过，不要忘了，我这个U盘貌似有莫名的分区格式错误。所以我们先学习修复U盘上分区格式错误的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo ntfsfix /dev/sdb1</span><br></pre></td></tr></table></figure>
+<h2 id="4-创建挂载点并完成手动挂载"><a href="#4-创建挂载点并完成手动挂载" class="headerlink" title="4.创建挂载点并完成手动挂载"></a>4.创建挂载点并完成手动挂载</h2><p>修复了U盘的分区格式错误后，我们学习手动挂载U盘设备。通过学习以下挂载命令，我们可以知道，除了知道目标设备文件的文件系统格式、目标设备名称外，我们还需要一个可以挂载目标设备的挂载点目录，通常我们将这个挂载点目录创建在——”/media”下。（通过修复U盘后，再次插入U盘自动挂载后，我们可以查看到Ubuntu自动挂载的挂载点目录在——”/media/user/下，所以我们可以确定Linux都在“/media”下挂载设备。）这里我们创建的挂载点目录是“/media/usb”。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mount -t ntfs /dev/sdb1 /media/usb</span><br></pre></td></tr></table></figure>
+<img src="/post/3c503eab/mount.png" title="手动挂载U盘并检查是否挂载成功">
+<img src="/post/3c503eab/auto-mount.png" title="系统自动挂载U盘后查看挂载点目录">
+<h2 id="5-卸载设备"><a href="#5-卸载设备" class="headerlink" title="5.卸载设备"></a>5.卸载设备</h2><p>接下来我们学习手动卸载U盘的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo umount /media/usb</span><br></pre></td></tr></table></figure>
+<img src="/post/3c503eab/umount.png" title="卸载目标设备后检查是否卸载成功">
+<p>挂载成功后的挂载点目录显示为绿色背景，卸载成功后的目录显示为无色背景。</p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>这次的学习之旅暂告一个段落。搭建好这个博客后，就要多学习多写文章了。不写不知道自己的语言组织能力是多么的匮乏。</p>
+
       
     </div>
     
@@ -420,6 +503,24 @@
 
     
 
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    pan yang （潘羊）
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://sharppanyang.github.io/post/3c503eab.html" title="Ubuntu下手动挂载NTFS格式的U盘">https://sharppanyang.github.io/post/3c503eab.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
@@ -432,7 +533,7 @@
           
             <a href="/tags/mount/" rel="tag"># mount</a>
           
-            <a href="/tags/unmount/" rel="tag"># unmount</a>
+            <a href="/tags/umount/" rel="tag"># umount</a>
           
             <a href="/tags/NTFS/" rel="tag"># NTFS</a>
           
@@ -447,15 +548,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/post/4a17b156.html" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/4a17b156.html" rel="prev" title="Hello World">
-                Hello World <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -484,6 +585,9 @@
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -592,6 +696,50 @@
 
           
 
+          
+          <div id="binft" style="text-align:center;"></div> 
+          <script>
+              var binft = function (r) {
+                function t() {
+                  return b[Math.floor(Math.random() * b.length)]
+                }  
+                function e() {
+                  return String.fromCharCode(94 * Math.random() + 33)
+                }
+                function n(r) {
+                  for (var n = document.createDocumentFragment(), i = 0; r > i; i++) {
+                    var l = document.createElement("span");
+                    l.textContent = e(), l.style.color = t(), n.appendChild(l)
+                  }
+                  return n
+                }
+                function i() {
+                  var t = o[c.skillI];
+                  c.step ? c.step-- : (c.step = g, c.prefixP < l.length ? (c.prefixP >= 0 && (c.text += l[c.prefixP]), c.prefixP++) : "forward" === c.direction ? c.skillP < t.length ? (c.text += t[c.skillP], c.skillP++) : c.delay ? c.delay-- : (c.direction = "backward", c.delay = a) : c.skillP > 0 ? (c.text = c.text.slice(0, -1), c.skillP--) : (c.skillI = (c.skillI + 1) % o.length, c.direction = "forward")), r.textContent = c.text, r.appendChild(n(c.prefixP < l.length ? Math.min(s, s + c.prefixP) : Math.min(s, t.length - c.skillP))), setTimeout(i, d)
+                }
+                var l = "",
+                o = ["青青陵上柏，磊磊涧中石。", "人生天地间，忽如远行客。","斗酒相娱乐，聊厚不为薄。", "驱车策驽马，游戏宛与洛。","洛中何郁郁，冠带自相索。","长衢罗夹巷，王侯多第宅。","两宫遥相望，双阙百余尺。","极宴娱心意，戚戚何所迫？"].map(function (r) {
+                return r + ""
+                }),
+                a = 2,
+                g = 1,
+                s = 5,
+                d = 75,
+                b = ["rgb(110,64,170)", "rgb(150,61,179)", "rgb(191,60,175)", "rgb(228,65,157)", "rgb(254,75,131)", "rgb(255,94,99)", "rgb(255,120,71)", "rgb(251,150,51)", "rgb(226,183,47)", "rgb(198,214,60)", "rgb(175,240,91)", "rgb(127,246,88)", "rgb(82,246,103)", "rgb(48,239,130)", "rgb(29,223,163)", "rgb(26,199,194)", "rgb(35,171,216)", "rgb(54,140,225)", "rgb(76,110,219)", "rgb(96,84,200)"],
+                c = {
+                  text: "",
+                  prefixP: -s,
+                  skillI: 0,
+                  skillP: 0,
+                  direction: "forward",
+                  delay: a,
+                  step: g
+                };
+                i()
+                };
+                binft(document.getElementById('binft'));
+            </script>
+            
         </div>
       </section>
 
@@ -605,7 +753,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ubuntu下手动挂载NTFS格式的U盘"><span class="nav-number">1.</span> <span class="nav-text">Ubuntu下手动挂载NTFS格式的U盘</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-查看插入U盘在系统下分配的设备名称"><span class="nav-number">1.1.</span> <span class="nav-text">1.查看插入U盘在系统下分配的设备名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-查看该U盘的文件存储格式"><span class="nav-number">1.2.</span> <span class="nav-text">2.查看该U盘的文件存储格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-修复U盘上莫名的错误"><span class="nav-number">1.3.</span> <span class="nav-text">3.修复U盘上莫名的错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-创建挂载点并完成手动挂载"><span class="nav-number">1.4.</span> <span class="nav-text">4.创建挂载点并完成手动挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-卸载设备"><span class="nav-number">1.5.</span> <span class="nav-text">5.卸载设备</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ubuntu下手动挂载NTFS格式的U盘"><span class="nav-number">1.</span> <span class="nav-text">Ubuntu下手动挂载NTFS格式的U盘</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-查看插入U盘在系统下分配的设备名称"><span class="nav-number">1.1.</span> <span class="nav-text">1.查看插入U盘在系统下分配的设备名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-查看该U盘的文件系统格式"><span class="nav-number">1.2.</span> <span class="nav-text">2.查看该U盘的文件系统格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-修复U盘上莫名的错误"><span class="nav-number">1.3.</span> <span class="nav-text">3.修复U盘上莫名的错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-创建挂载点并完成手动挂载"><span class="nav-number">1.4.</span> <span class="nav-text">4.创建挂载点并完成手动挂载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-卸载设备"><span class="nav-number">1.5.</span> <span class="nav-text">5.卸载设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结束语"><span class="nav-number">1.6.</span> <span class="nav-text">结束语</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -620,6 +768,7 @@
 
 
         
+
       </div>
     </main>
 
@@ -631,6 +780,15 @@
   </span>
   <span class="author" itemprop="copyrightHolder">pan yang （潘羊）</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">919</span>
   
 </div>
 
@@ -801,10 +959,349 @@
 
 
 
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'pahTSEFGhwHlS22OL3TfJ0nv-gzGzoHsz',
+        appKey: 'UV0AjAYPUwc1ItYRH29sh18Q',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
 
 
   
 
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
 
 
 
@@ -824,5 +1321,25 @@
 
   
 
+
+  <!-- 雪花特效 <script type="text/javascript"> var windowWidth = $(window).width(); if (windowWidth > 480) { document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>'); } </script> --> 
 </body>
 </html>
+<!-- 页面点击小红心 -->
+<!--
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+-->
+
+<!-- 页面点击出现文字 -->
+<script type="text/javascript" src="/js/src/click_show_text.js"></script>
+
+<!-- 页面点击出现烟花爆炸效果 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas>
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+<script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<!-- 样式一（鼠标点击更换样式） -->
+<script src="https://g.joyinshare.com/hc/ribbon.min.js" type="text/javascript"></script>
+
+<!-- 样式二（飘动的彩带） -->
+<script src="https://g.joyinshare.com/hc/piao.js" type="text/javascript"></script>

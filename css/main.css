@@ -1642,6 +1642,13 @@ pre .javascript .function {
 .fancybox-close:hover {
   border: none;
 }
+.post-copyright {
+  margin: 2em 0 0;
+  padding: 0.5em 1em;
+  border-left: 3px solid #ff1700;
+  background-color: #f9f9f9;
+  list-style: none;
+}
 .rtl.post-body p,
 .rtl.post-body a,
 .rtl.post-body h1,
@@ -1743,6 +1750,10 @@ pre .javascript .function {
   height: auto;
   border: 1px solid #eee;
 }
+.site-author-image:hover {
+  -webkit-animation: flip 1s;
+  animation: flip 1s;
+}
 .site-author-name {
   margin: 0;
   text-align: center;
@@ -1823,7 +1834,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #f521ab;
+  background: #36ff8e;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2990,4 +3001,7 @@ pre .javascript .function {
   .post-body {
     text-align: justify;
   }
+}
+* {
+  cursor: url("https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@1.0/images/mouse.cur"), auto !important;
 }
