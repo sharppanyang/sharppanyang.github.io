@@ -6,14 +6,15 @@
 title: panyang's home
 subtitle: panyang's blog
 description: 潘羊的生活博客
-keywords:
+keywords: 
 author: pan yang （潘羊）
 language: zh-Hans
 timezone: Asia/Shanghai
 
 # URL 网址
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://sharppanyang.github.io/
+# url: https://sharppanyang.github.io/
+url: https://panyang.online
 root: /
 # permalink: :year/:month/:day/:title/
 permalink: post/:abbrlink.html
@@ -98,3 +99,14 @@ baidusitemap:
   path: baidusitemap.xml
 sitemap:
   path: sitemap.xml
+
+# Extensions
+## Plugins: http://hexo.io/plugins/
+#RSS订阅
+plugin:
+- hexo-generator-feed
+#Feed Atom
+feed:
+type: atom
+path: atom.xml
+limit: 20
