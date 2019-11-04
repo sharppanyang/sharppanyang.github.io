@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[centos7 将普通用户加入sudoers中，获取sudo执行权限]]></title>
+    <url>%2Fpost%2Fcc1b02ec.html</url>
+    <content type="text"><![CDATA[centos7.x 将普通用户加入sudoers中，获取sudo执行权限0 问题由来&emsp;&emsp;你在提起兴致学习的时候，兴冲冲地往黑洞洞的文本窗口输入下一行：1[pan@localhost ~]$ sudo ls &emsp;&emsp;按照系统验证需求，你输入用户密码，结果返回的是冰冷的一串错误信息： pan is not in the sudoers file. This incident will be reported. 1 定位sudoers文件&emsp;&emsp;按照错误信息的提示，我们获知由于用户“pan”不在sudoers文件中，导致了该命令行执行失败。&emsp;&emsp;很自然地，我们要定位一下这个文件在哪里，使用这个命令可以达到这个目的：1[pan@localhost ~]$ whereis sudoers &emsp;&emsp;系统返回我们想要的结果：/etc/sudoers sudoers:&emsp; /etc/sudoers.d&emsp; /etc/sudoers&emsp; /usr/share/man/man5/&emsp;sudoers.5.gz 2 将普通用户添加进sudoers文件&emsp;&emsp;既然找到了目标文件，我们的目的——往sudoers文件中添加用户“pan”，就完成了一半。那剩下的一半怎么做，我们不禁会问。我需要看看sudoers文档里的内容，也许文档注释里就告诉了如何按照要求添加一个用户。&emsp;&emsp;尝试查看 /etc/sudoers 里的内容：1[pan@localhost ~]$ ls -l /etc/sudoers &amp;&amp; cat /etc/sudoers &emsp;&emsp;返回的是一串错误信息： -r–r—–. 1 root root 3938 4月 11 2018 /etc/sudoerscat:&emsp; /etc/sudoers:&emsp; Permission denied &emsp;&emsp;从返回信息中可以获知，该文件属主root拥有读权限，属组root拥有读权限，只有上述用户才可以查看文件 /etc/sudoers 的内容。&emsp;&emsp;切换到root用户完成查看文件 /etc/sudoers 的内容并添加用户“pan”进sudoers文件：123[pan@localhost ~]$ su - root``` &amp;emsp;&amp;emsp;查看 /etc/sudoers 里的内容： [root@localhost ~]# vim /etc/sudoers12345&amp;emsp;&amp;emsp;我们重点查看这一段内容： &gt; \#\# Allow root to run any commands anywhere root&amp;emsp; ALL=(ALL)&amp;emsp; ALL &amp;emsp;&amp;emsp;既然用户root是这样写入sudoers文件，很自然我们想到把用户root替换成用户“pan”： [root@localhost ~]# echo “pan ALL=(ALL) ALL” &gt;&gt; /etc/sudoers12## 3 验证 &amp;emsp;&amp;emsp;切换回用户“pan”并验证sudo的执行权限： [pan@localhost ~]$ sudo ls` 4 结语&emsp;&emsp;这是一个很小的问题，本来是不值得一记的，但我生性太懒惰了，学东西时兴冲冲的，学了一段时间后就弃置迤逦、不管不顾了。写下来，就是为了磨性子。]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>CentOS</tag>
+        <tag>sudo</tag>
+        <tag>权限</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ubuntu下手动挂载NTFS格式的U盘]]></title>
+    <url>%2Fpost%2F3c503eab.html</url>
+    <content type="text"><![CDATA[Ubuntu下手动挂载NTFS格式的U盘我们都知道，在Linux下使用U盘、硬盘等移动设备时，需要手动挂载这些设备。现在的很多Linux桌面发行版本，如我使用的Ubuntu 18在检测到有移动设备插入时，将会自动完成挂载该设备。但凡事都会有意外，今天我插入的U盘居然有莫名的错误（我猜测可能是未正确卸载导致的），这时候我可怜的Ubuntu兄弟就没能自动挂载了。 有需求就要学习新知识，这不我赶紧趁着这样的机会学习下，手动挂载移动设备。 我们先来理一下，达成目标的学习思路： 1.查看插入U盘在系统下分配的设备名称 2.查看该U盘的文件存储格式 3.修复U盘上莫名的错误 4.创建挂载点并完成手动挂载 5.卸载设备 1.查看插入U盘在系统下分配的设备名称我们将学会使用下面这个shell命令来比对出，插入U盘后比插入U盘前多出来的设备名称。 1$ cat /proc/partitions 通过以下截图我们比对出系统给U盘分配出来的设备名称： 由此可知，我们插入的U盘设备名称叫做 /dev/sdb1 。 2.查看该U盘的文件系统格式找到了U盘设备的名称后，我们急需知道该文件系统格式。接下来我们学习这个shell命令来查询U盘设备的文件系统格式： 1$ sudo fdisk -l /dev/sdb 通过以下截图，我们可以看到目标设备——“/dev/sdb1”的文件系统格式是“NTFS”： 3.修复U盘上莫名的错误现在我们知道了U盘的设备名称和文件格式系统，理论上可以进行手动的挂载U盘了。不过，不要忘了，我这个U盘貌似有莫名的分区格式错误。所以我们先学习修复U盘上分区格式错误的命令： 1$ sudo ntfsfix /dev/sdb1 4.创建挂载点并完成手动挂载修复了U盘的分区格式错误后，我们学习手动挂载U盘设备。通过学习以下挂载命令，我们可以知道，除了知道目标设备文件的文件系统格式、目标设备名称外，我们还需要一个可以挂载目标设备的挂载点目录，通常我们将这个挂载点目录创建在——”/media”下。（通过修复U盘后，再次插入U盘自动挂载后，我们可以查看到Ubuntu自动挂载的挂载点目录在——”/media/user/下，所以我们可以确定Linux都在“/media”下挂载设备。）这里我们创建的挂载点目录是“/media/usb”。 1$ sudo mount -t ntfs /dev/sdb1 /media/usb 5.卸载设备接下来我们学习手动卸载U盘的命令： 1$ sudo umount /media/usb 挂载成功后的挂载点目录显示为绿色背景，卸载成功后的目录显示为无色背景。 结束语这次的学习之旅暂告一个段落。搭建好这个博客后，就要多学习多写文章了。不写不知道自己的语言组织能力是多么的匮乏。]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Ubuntu</tag>
+        <tag>mount</tag>
+        <tag>umount</tag>
+        <tag>NTFS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2Fpost%2F4a17b156.html</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+</search>

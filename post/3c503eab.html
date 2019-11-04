@@ -74,6 +74,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="panyang's home" type="application/atom+xml">
+
 
 
 
@@ -83,21 +85,21 @@
 <meta name="keywords" content="Linux,Ubuntu,mount,umount,NTFS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu下手动挂载NTFS格式的U盘">
-<meta property="og:url" content="https://sharppanyang.github.io/post/3c503eab.html">
+<meta property="og:url" content="https://panyang.online/post/3c503eab.html">
 <meta property="og:site_name" content="panyang&#39;s home">
 <meta property="og:description" content="Ubuntu下手动挂载NTFS格式的U盘我们都知道，在Linux下使用U盘、硬盘等移动设备时，需要手动挂载这些设备。现在的很多Linux桌面发行版本，如我使用的Ubuntu 18在检测到有移动设备插入时，将会自动完成挂载该设备。但凡事都会有意外，今天我插入的U盘居然有莫名的错误（我猜测可能是未正确卸载导致的），这时候我可怜的Ubuntu兄弟就没能自动挂载了。 有需求就要学习新知识，这不我赶紧趁着这">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://sharppanyang.github.io/post/3c503eab/unexist_sdb.png">
-<meta property="og:image" content="https://sharppanyang.github.io/post/3c503eab/exist_sdb.png">
-<meta property="og:image" content="https://sharppanyang.github.io/post/3c503eab/file_system_format.png">
-<meta property="og:image" content="https://sharppanyang.github.io/post/3c503eab/mount.png">
-<meta property="og:image" content="https://sharppanyang.github.io/post/3c503eab/auto-mount.png">
-<meta property="og:image" content="https://sharppanyang.github.io/post/3c503eab/umount.png">
-<meta property="og:updated_time" content="2019-04-15T01:07:27.764Z">
+<meta property="og:image" content="https://panyang.online/post/3c503eab/unexist_sdb.png">
+<meta property="og:image" content="https://panyang.online/post/3c503eab/exist_sdb.png">
+<meta property="og:image" content="https://panyang.online/post/3c503eab/file_system_format.png">
+<meta property="og:image" content="https://panyang.online/post/3c503eab/mount.png">
+<meta property="og:image" content="https://panyang.online/post/3c503eab/auto-mount.png">
+<meta property="og:image" content="https://panyang.online/post/3c503eab/umount.png">
+<meta property="og:updated_time" content="2019-04-17T01:10:29.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu下手动挂载NTFS格式的U盘">
 <meta name="twitter:description" content="Ubuntu下手动挂载NTFS格式的U盘我们都知道，在Linux下使用U盘、硬盘等移动设备时，需要手动挂载这些设备。现在的很多Linux桌面发行版本，如我使用的Ubuntu 18在检测到有移动设备插入时，将会自动完成挂载该设备。但凡事都会有意外，今天我插入的U盘居然有莫名的错误（我猜测可能是未正确卸载导致的），这时候我可怜的Ubuntu兄弟就没能自动挂载了。 有需求就要学习新知识，这不我赶紧趁着这">
-<meta name="twitter:image" content="https://sharppanyang.github.io/post/3c503eab/unexist_sdb.png">
+<meta name="twitter:image" content="https://panyang.online/post/3c503eab/unexist_sdb.png">
 
 
 
@@ -127,7 +129,7 @@
 
 
 
-  <link rel="canonical" href="https://sharppanyang.github.io/post/3c503eab.html">
+  <link rel="canonical" href="https://panyang.online/post/3c503eab.html">
 
 
 
@@ -345,7 +347,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sharppanyang.github.io/post/3c503eab.html">
+    <link itemprop="mainEntityOfPage" href="https://panyang.online/post/3c503eab.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pan yang （潘羊）">
@@ -471,6 +473,7 @@
 <p>3.修复U盘上莫名的错误</p>
 <p>4.创建挂载点并完成手动挂载</p>
 <p>5.卸载设备</p>
+<a id="more"></a>
 <h2 id="1-查看插入U盘在系统下分配的设备名称"><a href="#1-查看插入U盘在系统下分配的设备名称" class="headerlink" title="1.查看插入U盘在系统下分配的设备名称"></a>1.查看插入U盘在系统下分配的设备名称</h2><p>我们将学会使用下面这个shell命令来比对出，插入U盘后比插入U盘前多出来的设备名称。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat /proc/partitions</span><br></pre></td></tr></table></figure>
 <p>通过以下截图我们比对出系统给U盘分配出来的设备名称：</p>
@@ -512,7 +515,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://sharppanyang.github.io/post/3c503eab.html" title="Ubuntu下手动挂载NTFS格式的U盘">https://sharppanyang.github.io/post/3c503eab.html</a>
+    <a href="https://panyang.online/post/3c503eab.html" title="Ubuntu下手动挂载NTFS格式的U盘">https://panyang.online/post/3c503eab.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -557,6 +560,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/cc1b02ec.html" rel="prev" title="centos7 将普通用户加入sudoers中，获取sudo执行权限">
+                centos7 将普通用户加入sudoers中，获取sudo执行权限 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -638,7 +645,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -660,7 +667,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -668,6 +675,13 @@
 
           </nav>
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
@@ -788,7 +802,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">919</span>
+    <span title="Site words total count">1.6k</span>
   
 </div>
 
@@ -974,7 +988,7 @@
         notify: false,
         appId: 'pahTSEFGhwHlS22OL3TfJ0nv-gzGzoHsz',
         appKey: 'UV0AjAYPUwc1ItYRH29sh18Q',
-        placeholder: 'Just go go',
+        placeholder: '来说一句',
         avatar:'mm',
         guest_info:guest,
         pageSize:'10' || 10,
@@ -990,7 +1004,7 @@
     var isfetched = false;
     var isXml = true;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length === 0) {
       search_path = "search.xml";
     } else if (/json$/i.test(search_path)) {
@@ -1311,6 +1325,21 @@
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
   
