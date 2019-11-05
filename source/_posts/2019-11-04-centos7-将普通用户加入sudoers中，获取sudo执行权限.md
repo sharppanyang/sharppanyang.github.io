@@ -29,7 +29,7 @@ date: 2019-11-04 19:03:53
 &emsp;&emsp;系统返回我们想要的结果：/etc/sudoers  
 > sudoers:&emsp; /etc/sudoers.d&emsp; /etc/sudoers&emsp; /usr/share/man/man5/&emsp;sudoers.5.gz  
 
-<!--more-->
+<!--more-->  
 
 ## 2 将普通用户添加进sudoers文件
 &emsp;&emsp;既然找到了目标文件，我们的目的——往sudoers文件中添加用户“pan”，就完成了一半。那剩下的一半怎么做，我们不禁会问。我需要看看sudoers文档里的内容，也许文档注释里就告诉了如何按照要求添加一个用户。  
@@ -42,7 +42,7 @@ date: 2019-11-04 19:03:53
 cat:&emsp; /etc/sudoers:&emsp; Permission denied  
 
 &emsp;&emsp;从返回信息中可以获知，该文件属主root拥有读权限，属组root拥有读权限，只有上述用户才可以查看文件 /etc/sudoers 的内容。  
-&emsp;&emsp;切换到root用户完成查看文件 /etc/sudoers 的内容并添加用户“pan”进sudoers文件：    
+&emsp;&emsp;切换到root用户完成查看文件 /etc/sudoers 的内容并添加用户“pan”进sudoers文件：      
 ```  
 [pan@localhost ~]$ su - root    
 ```  
